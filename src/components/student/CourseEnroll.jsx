@@ -12,7 +12,7 @@ const CourseEnroll = (props) => {
   const [message, setMessage] = useState('');
 
   const fetchSections = async () => {
-    // get list of open sections for enrollment
+    // get a list of open sections for enrollment
     try {
       const response = await fetch(`${REGISTRAR_URL}/sections/open`,
         {
@@ -40,6 +40,48 @@ const CourseEnroll = (props) => {
     fetchSections();
   }, []);
 
+  //  Enrolls the student in the selected section
+  const enrollInSection = async (sectionNo) => {
+    try {
+      const response = await fetch(`${REGISTRAR_URL}/enrollments/sections/${sectionNo}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('jwt'),
+          },
+        }
+      );
+
+      if (response.ok) {
+        setMessage("Enrolled in section " + sectionNo);
+        await fetchSections();
+      } else {
+        const body = await response.json();
+        setMessage(body);
+      }
+    } catch (error) {
+      setMessage(error.toString());
+    }
+  }
+
+  //  Brings up an alert message to confirm/deny enrollment in section
+  const handleAddClick =  (courseId, sectionNo) => {
+    confirmAlert({
+      title: "Confirm Enrollment",
+      message: "Are you sure you want to add " + courseId + " section " + sectionNo + " to your schedule?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => enrollInSection(sectionNo)
+        },
+        {
+          label: "No"
+        }
+      ]
+    })
+  }
+
 
 
   const headers = ['section No', 'year', 'semester', 'course Id', 'section', 'title', 'building', 'room', 'times', 'instructor', ''];
@@ -48,10 +90,35 @@ const CourseEnroll = (props) => {
     <div>
       <Messages response={message} />
       <h3>Open Sections Available for Enrollment</h3>
-      <p>To be implemented. Display a table of sections that are open for enrollment with columns in headers.
-        The last column is an "Add" button that when clicked will first confirm that user want to add
-        the course, then adds the course to the students schedule.
-      </p>
+      <table>
+        <thead>
+          <tr>
+            {headers.map((column, idx) => (<th key={idx}>{column}</th>))}
+          </tr>
+        </thead>
+        <tbody>
+        {sections.map((sectionHeader, index) => (
+            <tr key={index}>
+              <td>{sectionHeader.secNo}</td>
+              <td>{sectionHeader.year}</td>
+              <td>{sectionHeader.semester}</td>
+              <td>{sectionHeader.courseId}</td>
+              <td>{sectionHeader.secId}</td>
+              <td>{sectionHeader.title}</td>
+              <td>{sectionHeader.building}</td>
+              <td>{sectionHeader.room}</td>
+              <td>{sectionHeader.times}</td>
+              <td>{sectionHeader.instructorName}</td>
+              <td>
+                <button onClick={() => handleAddClick(
+                    sectionHeader.courseId, sectionHeader.secNo)}>
+                  Add</button>
+              </td>
+            </tr>
+            ))
+        }
+        </tbody>
+      </table>
 
     </div>
   );
