@@ -43,6 +43,45 @@ const ScheduleView = () => {
     }
   }
 
+  const dropEnrollment = async (enrollmentId) => {
+    try {
+      const response = await fetch(`${REGISTRAR_URL}/enrollments/${enrollmentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem('jwt'),
+        },
+      }
+      )
+
+      if (response.ok) {
+        setMessage("Dropped class");
+        fetchEnrollments(term.year, term.semester);
+      } else {
+        const body = await response.json();
+        setMessage(body);
+      }
+    } catch (error) {
+      setMessage(error.toString());
+    }
+  }
+
+  const handleDropClick = (enrollmentId) => {
+    confirmAlert({
+      title: "Confirm Drop",
+      message: "Are you sure you want to drop this class?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => dropEnrollment(enrollmentId)
+        },
+        {
+          label: "No"
+        }
+      ]
+    })
+  }
+
 
   const headings = ["enrollmentId", "secNo", "courseId", "secId", "building", "room", "times", ""];
 
@@ -50,12 +89,36 @@ const ScheduleView = () => {
     <div>
       <Messages response={message} />
       <SelectTerm buttonText="Get Schedule" onClick={prefetchEnrollments} />
-      <p>To be implemented.  Display a table with the sections the student is enrolled in for the given term.
-        For each section, display the columns as given in headings.
-        For each table row, a Drop button will allow the student to drop the section.
-        Confirm that the user wants to drop before doing the REST delete request.
-      </p>
-
+      <h3>My Schedule for {term.semester} {term.year}</h3>
+      {enrollments.length === 0 ? (
+          <p>No enrollments found.</p>
+      ) : (
+          <table>
+            <thead>
+            <tr>
+              {headings.map((heading, idx) => (
+                  <th key={idx}>{heading || 'Action'}</th>
+              ))}
+            </tr>
+            </thead>
+            <tbody>
+            {enrollments.map((e, idx) => (
+                <tr key={idx}>
+                  <td>{e.enrollmentId}</td>
+                  <td>{e.sectionNo}</td>
+                  <td>{e.courseId}</td>
+                  <td>{e.sectionId}</td>
+                  <td>{e.building}</td>
+                  <td>{e.room}</td>
+                  <td>{e.times}</td>
+                  <td>
+                    <button onClick={() => handleDropClick(e.enrollmentId)}>Drop</button>
+                  </td>
+                </tr>
+            ))}
+            </tbody>
+          </table>
+      )}
     </div>
   );
 
