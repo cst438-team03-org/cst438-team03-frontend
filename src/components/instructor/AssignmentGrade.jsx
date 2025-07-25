@@ -8,7 +8,6 @@ const AssignmentGrade = ({ assignment }) => {
   const [grades, setGrades] = useState([]);
   const dialogRef = useRef();
 
-
   const editOpen = () => {
     setMessage('');
     setGrades([]);
@@ -46,14 +45,39 @@ const AssignmentGrade = ({ assignment }) => {
   const headers = ['gradeId', 'student name', 'student email', 'score'];
 
   const handleScoreChange = (gradeId, newScore) => {
+    // Convert empty string to null for proper handling
+    const scoreValue = newScore === '' ? null : parseInt(newScore);
+    
     setGrades(grades.map(grade => 
       grade.gradeId === gradeId 
-        ? { ...grade, score: newScore }
+        ? { ...grade, score: scoreValue }
         : grade
     ));
   };
 
   const handleSave = async () => {
+    // Check for empty scores before saving
+    const emptyScores = grades.filter(grade => 
+      grade.score === '' || grade.score === null || grade.score === undefined
+    );
+    
+    if (emptyScores.length > 0) {
+      setMessage('Please enter scores for all students before saving');
+      return;
+    }
+
+    // Validate that all scores are valid numbers within range
+    const invalidScores = grades.filter(grade => {
+      const score = parseFloat(grade.score);
+      return grade.score !== '' && grade.score !== null && grade.score !== undefined && 
+             (isNaN(score) || score < 0 || score > 100);
+    });
+
+    if (invalidScores.length > 0) {
+      setMessage('All scores must be valid numbers between 0 and 100');
+      return;
+    }
+
     try {
       const response = await fetch(`${GRADEBOOK_URL}/grades`,
         {

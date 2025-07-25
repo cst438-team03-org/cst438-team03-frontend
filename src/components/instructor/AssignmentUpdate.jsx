@@ -18,10 +18,20 @@ const AssignmentUpdate = ({ editAssignment, onClose }) => {
     dialogRef.current.showModal();
   };
 
-  const saveAssignment = async () =>
-  {
-    try
-    {
+  const saveAssignment = async () => {
+    // Validate that due date is not empty
+    if (!assignment.dueDate || assignment.dueDate.trim() === '') {
+      setMessage('Can not submit empty date');
+      return;
+    }
+
+    // Validate that title is not empty
+    if (!assignment.title || assignment.title.trim() === '') {
+      setMessage('Assignment title cannot be empty');
+      return;
+    }
+
+    try {
       const response = await fetch(`${GRADEBOOK_URL}/assignments`, {
         method: 'PUT',
         headers: {
@@ -30,19 +40,16 @@ const AssignmentUpdate = ({ editAssignment, onClose }) => {
         },
         body: JSON.stringify(assignment),
       });
-      if (response.ok)
-      {
+      if (response.ok) {
         const data = await response.json();
         setMessage('Assignment updated successfully');
         dialogRef.current.close();
         onClose();
-      } else
-      {
+      } else {
         const body = await response.json();
         setMessage(body);
       }
-    } catch (err)
-    {
+    } catch (err) {
       setMessage(err);
     }
   };
