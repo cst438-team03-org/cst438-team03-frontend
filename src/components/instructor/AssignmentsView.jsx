@@ -46,11 +46,11 @@ const AssignmentsView = () => {
     fetchAssignments()
   }, []);
 
-  const handleDelete = async (assignmentId) =>
+  const handleDelete = async (assignmentId ,assignmentTitle) =>
   {
     confirmAlert({
       title: 'Confirm Delete',
-      message: 'Are you sure you want to delete this assignment?',
+      message: `Are you sure you want to delete ${assignmentTitle} assignment?`,
       buttons: [
         {
           label: 'Yes',
@@ -92,10 +92,6 @@ const AssignmentsView = () => {
     <div>
       <Messages response={message} />
 
-      <p>To be implemented. Display a table. Column headings are as givin in headers.
-        For each row, show the id, title, due date of the assignment
-        along with buttons to edit and delete the assignment </p>
-
       <table className="table table-striped">
         <thead>
           <tr>
@@ -117,7 +113,7 @@ const AssignmentsView = () => {
                 <AssignmentUpdate assignment={assignment} onClose={fetchAssignments} />
               </td>
               <td>
-                <button onClick={() => handleDelete(assignment.id)}>Delete</button>
+                <button onClick={() => handleDelete(assignment.id, assignment.title)}>Delete</button>
               </td>
             </tr>
           ))}
