@@ -110,7 +110,7 @@ const AssignmentsView = () => {
                 <AssignmentGrade assignment={assignment} onClose={fetchAssignments} />
               </td>
               <td>
-                <AssignmentUpdate assignment={assignment} onClose={fetchAssignments} />
+                <AssignmentUpdate editAssignment={assignment} onClose={fetchAssignments} />
               </td>
               <td>
                 <button onClick={() => handleDelete(assignment.id, assignment.title)}>Delete</button>
