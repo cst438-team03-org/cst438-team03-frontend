@@ -13,8 +13,7 @@ const AssignmentGrade = ({ assignment }) => {
     setMessage('');
     setGrades([]);
     fetchGrades(assignment.id);
-    // to be implemented.  invoke showModal() method on the dialog element.
-    // dialogRef.current.showModal();
+     dialogRef.current.showModal();
   };
 
   const editClose = () => {
@@ -46,15 +45,81 @@ const AssignmentGrade = ({ assignment }) => {
 
   const headers = ['gradeId', 'student name', 'student email', 'score'];
 
+  const handleScoreChange = (gradeId, newScore) => {
+    setGrades(grades.map(grade => 
+      grade.gradeId === gradeId 
+        ? { ...grade, score: newScore }
+        : grade
+    ));
+  };
+
+  const handleSave = async () => {
+    try {
+      const response = await fetch(`${GRADEBOOK_URL}/grades`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem('jwt'),
+          },
+          body: JSON.stringify(grades)
+        }
+      );
+      
+      if (response.ok) {
+        setMessage('Grades saved successfully');
+        setTimeout(() => {
+          editClose();
+        }, 1500);
+      } else {
+        const errorData = await response.json();
+        setMessage(errorData);
+      }
+    } catch (err) {
+      setMessage(err.message);
+    }
+  };
+
   return (
     <>
       <button id="gradeButton" onClick={editOpen}>Grade</button>
       <dialog ref={dialogRef}>
-        <p>To be implemented.  Display table with columns headings as given in headers.
-          For each student, display and allow the user to edit the student's score.
-          Buttons for Close and Save.
-        </p>
-
+        <h2>Grade Assignment: {assignment.title}</h2>
+        <Messages response={message} />
+        
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              {headers.map((header, index) => (
+                <th key={index}>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {grades.map((grade) => (
+              <tr key={grade.gradeId}>
+                <td>{grade.gradeId}</td>
+                <td>{grade.studentName}</td>
+                <td>{grade.studentEmail}</td>
+                <td>
+                  <input
+                    type="number"
+                    value={grade.score || ''}
+                    onChange={(e) => handleScoreChange(grade.gradeId, e.target.value)}
+                    min="0"
+                    max="100"
+                    step="1"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        
+        <div style={{ marginTop: '20px' }}>
+          <button onClick={handleSave} style={{ marginRight: '10px' }}>Save</button>
+          <button onClick={editClose}>Close</button>
+        </div>
       </dialog>
     </>
   );
