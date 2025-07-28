@@ -58,11 +58,6 @@ const AssignmentUpdate = ({ editAssignment, onClose }) => {
     <>
       <button onClick={editOpen}>Edit</button>
       <dialog ref={dialogRef} >
-        <p>To be implemented.  Show the id, title and due date of the assignemnt.
-          Allow user to edit the title and due date.
-          Buttons for Close and Save.
-        </p>
-
         <h2>{`Editing Assignment ID: ${editAssignment.id}`}</h2>
         <Messages response={message} />
         <input
@@ -70,14 +65,16 @@ const AssignmentUpdate = ({ editAssignment, onClose }) => {
           placeholder="Assignment title"
           value={assignment.title || ''}
           onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
+          style={{ margin: '10px' }}
         />
         <input
           type="date"
           value={assignment.dueDate || ''}
           onChange={(e) => setAssignment({ ...assignment, dueDate: e.target.value })}
+          style={{ margin: '10px' }}
         />
-        <button onClick={() => dialogRef.current.close()}>Close</button>
-        <button onClick={saveAssignment}>Save</button>
+        <button onClick={() => dialogRef.current.close()} style={{ margin: '10px' }}>Close</button>
+        <button onClick={saveAssignment} style={{ margin: '10px' }} >Save</button>
 
       </dialog>
     </>

@@ -117,17 +117,17 @@ const AssignmentGrade = ({ assignment }) => {
           <thead>
             <tr>
               {headers.map((header, index) => (
-                <th key={index}>{header}</th>
+                <th key={index} style={{ padding: '10px 15px' }}>{header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {grades.map((grade) => (
               <tr key={grade.gradeId}>
-                <td>{grade.gradeId}</td>
-                <td>{grade.studentName}</td>
-                <td>{grade.studentEmail}</td>
-                <td>
+                <td style={{ padding: '10px 15px' }}>{grade.gradeId}</td>
+                <td style={{ padding: '10px 15px' }}>{grade.studentName}</td>
+                <td style={{ padding: '10px 15px' }}>{grade.studentEmail}</td>
+                <td style={{ padding: '10px 15px' }}>
                   <input
                     type="number"
                     value={grade.score || ''}

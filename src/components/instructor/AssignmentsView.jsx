@@ -96,20 +96,20 @@ const AssignmentsView = () => {
         <thead>
           <tr>
             {headers.map((header, index) => (
-              <th key={index}>{header}</th>
+              <th key={index} style={{ paddingRight: '20px' }}>{header}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {assignments.map((assignment, index) => (
             <tr key={index}>
-              <td>{assignment.id}</td>
-              <td>{assignment.title}</td>
-              <td>{assignment.dueDate}</td>
-              <td>
+              <td style={{ paddingRight: '20px' }}>{assignment.id}</td>
+              <td style={{ paddingRight: '20px' }}>{assignment.title}</td>
+              <td style={{ paddingRight: '20px' }}>{assignment.dueDate}</td>
+              <td style={{ paddingRight: '20px' }}>
                 <AssignmentGrade assignment={assignment} onClose={fetchAssignments} />
               </td>
-              <td>
+              <td style={{ paddingRight: '20px' }}>
                 <AssignmentUpdate editAssignment={assignment} onClose={fetchAssignments} />
               </td>
               <td>
@@ -120,7 +120,9 @@ const AssignmentsView = () => {
         </tbody>
       </table>
 
-      <AssignmentAdd secNo={secNo} onClose={fetchAssignments} />
+      <div style={{ margin: '20px' }}>
+        <AssignmentAdd secNo={secNo} onClose={fetchAssignments} />
+      </div>
     </div>
   );
 }
