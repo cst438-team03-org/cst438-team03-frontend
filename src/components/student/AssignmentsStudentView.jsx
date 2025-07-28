@@ -42,7 +42,7 @@ const AssignmentsStudentView = () => {
 
       {assignments.length > 0 ? (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <table style={{ borderCollapse: 'collapse' }}>
+        <table>
           <thead>
             <tr>
               {headers.map((header) => (
