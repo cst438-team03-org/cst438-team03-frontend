@@ -40,9 +40,42 @@ const AssignmentsStudentView = () => {
 
       <SelectTerm buttonText="Get Assignments" onClick={fetchData} />
 
-      <p>To be implemented.  Display table with columns as given in headers.
-        Display assignment data.
-      </p>
+      {assignments.length > 0 ? (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <table style={{ borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              {headers.map((header) => (
+                <th
+                  key={header}
+                  style={{
+                    textAlign: 'left',
+                    padding: '8px',
+                  }}
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {assignments.map((a, idx) => (
+              <tr key={idx}>
+                <td style={{ textAlign: 'left', padding: '8px' }}>{a.courseId}</td>
+                <td style={{ textAlign: 'left', padding: '8px' }}>{a.title}</td>
+                <td style={{ textAlign: 'left', padding: '8px' }}>{a.dueDate}</td>
+                <td style={{ textAlign: 'left', padding: '8px' }}>{a.score != null ? a.score : ''}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      ) : (
+        <p style={{ textAlign: 'center' }}>No assignments to display.</p>
+      )}
+
+
     </>
   );
 }
