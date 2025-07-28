@@ -14,7 +14,6 @@ const AssignmentAdd = ({ onClose, secNo }) => {
   const editOpen = () => {
     setMessage('');
     setAssignment({ ...assignment, secNo: secNo, title: '', dueDate: '' });
-    // to be implemented.  invoke showModal() method on the dialog element.
      dialogRef.current.showModal();
   };
 
