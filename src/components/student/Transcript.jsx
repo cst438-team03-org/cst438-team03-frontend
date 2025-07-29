@@ -41,10 +41,50 @@ const Transcript = () => {
   return (
     <>
       <h3>Transcript</h3>
-      <p>To be implemented.  Display a table showing the course a student has taken.
-        The table columns are given in headers.
-      </p>
+      <Messages response={message} />
+        {courses.length > 0 ? (
+        <>
+          <div style={{ textAlign: 'center', marginBottom: '1em'}}>
+            <p style={{ margin: '0' }}>Student ID: {courses[0].studentId}</p>
+            <p style={{ margin: '0' }}>Student Name: {courses[0].name}</p>
+          </div>
 
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <table>
+              <thead>
+                <tr>
+                  {headers.map((header) => (
+                    <th
+                      key={header}
+                      style={{
+                        textAlign: 'left',
+                        padding: '8px',
+                      }}
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((c, idx) => (
+                  <tr key={idx}>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.year}</td>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.semester}</td>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.courseId}</td>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.sectionNo}</td>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.title}</td>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.credits}</td>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{c.grade ?? ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : (
+        <p style={{ textAlign: 'center' }}>No transcript data available.</p>
+      )}
     </>
   );
 }
