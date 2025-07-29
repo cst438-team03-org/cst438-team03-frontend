@@ -70,39 +70,54 @@ const EnrollmentsView = () => {
 
   return (
     <>
-      <h3> {courseId}-{secId} Enrollments</h3>
-      <Messages response={message} />
-      
-      <table style={{ borderSpacing: '15px 10px', borderCollapse: 'separate' }}>
-        <thead>
+      <div class="px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <h3 class="text-3xl font-semibold mb-4 text-white">
+      {courseId}-{secId} Enrollments
+    </h3>
+    <Messages response={message} class="text-lg text-gray-200 mb-6" />
+
+    <div class="overflow-x-auto bg-gray-800/75 shadow-md rounded-lg mb-6">
+      <table class="min-w-full divide-y divide-gray-700">
+        <thead class="bg-gray-700">
           <tr>
             {headers.map((header, index) => (
-              <th key={index} style={{ padding: '10px', textAlign: 'left' }}>{header}</th>
+              <th
+                key={index}
+                scope="col"
+                class="px-6 py-3 text-center text-base font-medium text-gray-200 uppercase tracking-wider"
+              >
+                {header}
+              </th>
             ))}
-          </tr> 
+          </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-700">
           {enrollments.map((enrollment, index) => (
-            <tr key={index}>
-              <td style={{ padding: '8px' }}>{enrollment.enrollmentId}</td>
-              <td style={{ padding: '8px' }}>{enrollment.studentId}</td>
-              <td style={{ padding: '8px' }}>{enrollment.name}</td>
-              <td style={{ padding: '8px' }}>{enrollment.email}</td>
-              <td style={{ padding: '8px' }}>
+            <tr key={index} class="even:bg-gray-700 odd:bg-gray-800 hover:bg-gray-600 transition-colors duration-200">
+              <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{enrollment.enrollmentId}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{enrollment.studentId}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{enrollment.name}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{enrollment.email}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">
                 <input
                   type="text"
                   onChange={(e) => handleGradeChange(index, e.target.value)}
                   placeholder="Enter grade"
+                  class="p-2 w-32 bg-gray-900 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      
-      <button onClick={saveAllGrades} >
-        Save All Grades
-      </button>
+    </div>
+
+    <button onClick={saveAllGrades} class="px-6 py-3 !bg-[#8aa35d] text-white font-semibold rounded-lg shadow-md focus:outline-none transition duration-300 ease-in-out">
+      Save All Grades
+    </button>
+  </div>
+</div>
 
     </>
   );
