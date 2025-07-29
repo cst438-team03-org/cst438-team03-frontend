@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Quicksand:wght@300..700&display=swap");
 @import "tailwindcss";
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -51,4 +56,18 @@
   margin-top: 0;
   text-align: left;
   border-spacing: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Alata', sans-serif;
+  padding: 10px;
+}
+
+Link, p, span, input, button{
+  font-family: 'Quicksand', sans-serif;
+  padding: 5px;
+}
+
+div{
+  font-family: 'Quicksand', sans-serif;
 }
