@@ -28,9 +28,11 @@ export const AdminRouter = ({ logout }) => {
 
 export const AdminHome = () => {
   return (
-    <div>
-      <h1>Admin Home</h1>
-      Manage users, courses and sections.
+    <div class="bg-[linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(https://wallpapers.com/images/hd/anime-school-background-dh3ommnxthw4nln7.jpg)] bg-cover bg-center h-screen items-center flex flex-col justify-center text-white">
+      <div class="bg-[#003366]/60 p-9 rounded-xl shadow-lg flex flex-col items-center space-y-6">
+        <h2 className="text-8xl font-bold mb-2">Admin Home</h2>
+        <p class="text-4xl">Manage users, courses and sections.</p>
+      </div>
     </div>
   );
 };
@@ -38,12 +40,14 @@ export const AdminHome = () => {
 export const AdminLayout = () => {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link> &nbsp;|&nbsp;
-        <Link to="/users">Users</Link>&nbsp;|&nbsp;
-        <Link to="/courses">Courses</Link>&nbsp;|&nbsp;
-        <Link to="/sections">Sections</Link>&nbsp;|&nbsp;
-        <Link to="/logout">Logout</Link>
+      <nav className="bg-[#003366] p-4 shadow-lg">
+        <div className="container mx-auto flex justify-center items-center space-x-6">
+          <Link to="/" className="!text-white text-lg font-medium hover:text-blue-100 transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#56BDA2]">Home</Link>
+          <Link to="/users" className="!text-white text-lg font-medium hover:text-blue-100 transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#56BDA2]">Users</Link>
+          <Link to="/courses" className="!text-white text-lg font-medium hover:text-blue-100 transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#56BDA2]">Courses</Link>
+          <Link to="/sections" className="!text-white text-lg font-medium hover:text-blue-100 transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#56BDA2]">Sections</Link>
+          <Link to="/logout" className="!text-white text-lg font-medium hover:text-blue-100 transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#56BDA2]">Logout</Link>
+        </div>
       </nav>
       <Outlet />
     </>

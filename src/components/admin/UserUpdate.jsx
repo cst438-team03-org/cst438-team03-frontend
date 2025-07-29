@@ -50,7 +50,7 @@ const UserUpdate = ({ onClose, editUser }) => {
 
   return (
     <>
-      <button onClick={dialogOpen}>Edit</button>
+      <button onClick={dialogOpen} className="!bg-blue-600 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out">Edit</button>
       <dialog ref={dialogRef}>
         <h2>Edit User</h2>
         <Messages response={message} />

@@ -52,7 +52,7 @@ const SectionAdd = ({ onClose }) => {
 
   return (
     <div>
-      <button onClick={dialogOpen}>Add Section</button>
+      <button onClick={dialogOpen} className="!bg-green-600 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out">Add Section</button>
       <dialog ref={dialogRef}>
         <h2>Add Section</h2>
         <Messages response={message} />

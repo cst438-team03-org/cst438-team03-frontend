@@ -32,14 +32,7 @@ const Login = ({ login }) => {
   }
 
   return (
-    // <div className="App bg-[url(/src/assets/classroom_dusk.jpg)] w-screen h-screen bg-cover bg-center flex flex-col items-center justify-center text-white">
-    //   <h1 class="text-3xl">Login</h1>
-    //   <h4>{message}</h4>
-    //   <input id="email" type="text" name="username" placeholder='email id' value={user.username} onChange={onChange} />
-    //   <input id="password" type="text" name="password" placeholder='password' value={user.password} onChange={onChange} />
-    //   <button id="loginButton" onClick={click}>Login</button>
-    // </div>
-        <div className="App bg-[url(/src/assets/classroom_dusk.jpg)] w-screen h-screen bg-cover bg-center flex items-center justify-center text-white">
+    <div className="App bg-[url(/src/assets/classroom_dusk.jpg)] w-screen h-screen bg-cover bg-center flex items-center justify-center text-white">
       <div className="bg-[#29202B]/80 p-8 rounded-xl shadow-lg flex flex-col items-center space-y-6 w-100">
         <h1 className="text-4xl font-bold mb-2">Login</h1>
         <h4 className="text-2xl text-[#d58f8e]">{message}</h4>
