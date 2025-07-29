@@ -46,8 +46,45 @@ const AssignmentsView = () => {
     fetchAssignments()
   }, []);
 
-
-
+  const handleDelete = async (assignmentId ,assignmentTitle) =>
+  {
+    confirmAlert({
+      title: 'Confirm Delete',
+      message: `Are you sure you want to delete ${assignmentTitle} assignment?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () =>
+          {
+            try
+            {
+              const response = await fetch(`${GRADEBOOK_URL}/assignments/${assignmentId}`, {
+                method: 'DELETE',
+                headers: {
+                  'Authorization': sessionStorage.getItem('jwt'),
+                },
+              });
+              if (response.ok)
+              {
+                setMessage('Assignment deleted successfully');
+                fetchAssignments();
+              } else
+              {
+                const errorText = await response.text();
+                setMessage(`Error: ${errorText}`);
+              }
+            } catch (err)
+            {
+              setMessage(`Error: ${err.message}`);
+            }
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+  };
 
   const headers = ['id', 'Title', 'Due Date', '', '', ''];
 
@@ -55,13 +92,37 @@ const AssignmentsView = () => {
     <div>
       <Messages response={message} />
 
-      <p>To be implemented. Display a table. Column headings are as givin in headers.
-        For each row, show the id, title, due date of the assignment
-        along with buttons to edit and delete the assignment </p>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            {headers.map((header, index) => (
+              <th key={index} style={{ paddingRight: '20px' }}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {assignments.map((assignment, index) => (
+            <tr key={index}>
+              <td style={{ paddingRight: '20px' }}>{assignment.id}</td>
+              <td style={{ paddingRight: '20px' }}>{assignment.title}</td>
+              <td style={{ paddingRight: '20px' }}>{assignment.dueDate}</td>
+              <td style={{ paddingRight: '20px' }}>
+                <AssignmentGrade assignment={assignment} onClose={fetchAssignments} />
+              </td>
+              <td style={{ paddingRight: '20px' }}>
+                <AssignmentUpdate editAssignment={assignment} onClose={fetchAssignments} />
+              </td>
+              <td>
+                <button onClick={() => handleDelete(assignment.id, assignment.title)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-
-
-      <AssignmentAdd secNo={secNo} onClose={fetchAssignments} />
+      <div style={{ margin: '20px' }}>
+        <AssignmentAdd secNo={secNo} onClose={fetchAssignments} />
+      </div>
     </div>
   );
 }

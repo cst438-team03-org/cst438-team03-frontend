@@ -15,20 +15,67 @@ const AssignmentUpdate = ({ editAssignment, onClose }) => {
   const editOpen = () => {
     setMessage('');
     setAssignment(editAssignment);
-    // to be implemented.  invoke showModal() method on the dialog element.
-    // dialogRef.current.showModal();
+    dialogRef.current.showModal();
   };
 
+  const saveAssignment = async () => {
+    // Validate that due date is not empty
+    if (!assignment.dueDate || assignment.dueDate.trim() === '') {
+      setMessage('Can not submit empty date');
+      return;
+    }
 
+    // Validate that title is not empty
+    if (!assignment.title || assignment.title.trim() === '') {
+      setMessage('Assignment title cannot be empty');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${GRADEBOOK_URL}/assignments`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': sessionStorage.getItem("jwt"),
+        },
+        body: JSON.stringify(assignment),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setMessage('Assignment updated successfully');
+        dialogRef.current.close();
+        onClose();
+      } else {
+        const body = await response.json();
+        setMessage(body);
+      }
+    } catch (err) {
+      setMessage(err);
+    }
+  };
 
   return (
     <>
       <button onClick={editOpen}>Edit</button>
       <dialog ref={dialogRef} >
-        <p>To be implemented.  Show the id, title and due date of the assignemnt.
-          Allow user to edit the title and due date.
-          Buttons for Close and Save.
-        </p>
+        <h2>{`Editing Assignment ID: ${editAssignment.id}`}</h2>
+        <Messages response={message} />
+        <input
+          type="text"
+          placeholder="Assignment title"
+          value={assignment.title || ''}
+          onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
+          style={{ margin: '10px' }}
+        />
+        <input
+          type="date"
+          value={assignment.dueDate || ''}
+          onChange={(e) => setAssignment({ ...assignment, dueDate: e.target.value })}
+          style={{ margin: '10px' }}
+        />
+        <button onClick={() => dialogRef.current.close()} style={{ margin: '10px' }}>Close</button>
+        <button onClick={saveAssignment} style={{ margin: '10px' }} >Save</button>
+
       </dialog>
     </>
   )
