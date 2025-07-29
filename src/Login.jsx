@@ -33,6 +33,7 @@ const Login = ({ login }) => {
 
   return (
     <div className="App">
+      <h3 class="text-3xl font-bold underline">Login</h3>
       <h4>{message}</h4>
       <input id="email" type="text" name="username" placeholder='email id' value={user.username} onChange={onChange} />
       <input id="password" type="text" name="password" placeholder='password' value={user.password} onChange={onChange} />
