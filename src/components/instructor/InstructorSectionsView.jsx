@@ -49,7 +49,7 @@ const InstructorSectionsView = () => {
           <Messages response={message} class="text-lg text-gray-200" />
           <h3 class="text-3xl font-semibold mb-6 text-white">Sections</h3>
 
-          <div class="bg-gray-800/75 shadow-md rounded-lg">
+          <div class="bg-gray-800/75 shadow-md rounded-lg overflow-hidden">
             <table class="w-full table-auto divide-y divide-gray-700">
               <thead class="bg-gray-700">
                 <tr>

@@ -121,7 +121,7 @@ const AssignmentsView = () => {
                       <AssignmentUpdate editAssignment={assignment} onClose={fetchAssignments} />
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">
-                      <button onClick={() => handleDelete(assignment.id, assignment.title)} class="bg-red-700 hover:bg-red-600 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out text-base shadow-md"> Delete </button>
+                      <button onClick={() => handleDelete(assignment.id, assignment.title)} class="!bg-red-800 hover:bg-red-600 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out text-base shadow-md"> Delete </button>
                     </td>
                   </tr>
                 ))}

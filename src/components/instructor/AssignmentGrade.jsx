@@ -108,7 +108,7 @@ const AssignmentGrade = ({ assignment }) => {
 
   return (
     <>
-      <button id="gradeButton" onClick={editOpen}>Grade</button>
+      <button id="gradeButton" class="!bg-purple-800" onClick={editOpen}>Grade</button>
       <dialog ref={dialogRef}>
         <h2>Grade Assignment: {assignment.title}</h2>
         <Messages response={message} />

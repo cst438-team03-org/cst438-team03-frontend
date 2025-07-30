@@ -141,11 +141,7 @@ function SectionsView() {
             </tr>
           </tbody>
         </table>
-        <button
-          type="submit"
-          onClick={fetchSections}
-          className="w-full !bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
-        >
+        <button type="submit" onClick={fetchSections} className="rainbow-button w-full font-bold py-2.5 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
           Search for Sections
         </button>
       </div>
