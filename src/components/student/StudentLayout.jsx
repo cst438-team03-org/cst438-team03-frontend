@@ -9,7 +9,7 @@ import Logout from "../../Logout";
 export const StudentRouter = ({ logout }) => {
 
   return (
-    <div className="App">
+    <div className="App class bg-[linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url(https://image.lexica.art/full_webp/5b864385-9d52-4125-97e6-7848fcecaa4f)] bg-cover bg-center h-screen items-center flex flex-col pt-30 text-white">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<StudentLayout />}>
@@ -28,8 +28,11 @@ export const StudentRouter = ({ logout }) => {
 
 export const StudentHome = () => {
   return (
-    <div>
-      <h1>Student Home</h1>
+    <div class="flex items-center h-75">
+      <div class="bg-[#003366]/30 p-8 rounded-lg shadow-xl text-center">
+        <h2 class="text-7xl font-extrabold text-white">Student Home</h2>
+        <p class="mt-5 text-xl">Add/drop courses and view your schedule, assignments, and transcript</p>
+      </div>
     </div>
   );
 };
@@ -37,13 +40,15 @@ export const StudentHome = () => {
 export const StudentLayout = () => {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link> &nbsp;|&nbsp;
-        <Link id="scheduleLink" to="/schedule">View Class Schedule</Link>&nbsp;|&nbsp;
-        <Link id="addCourseLink" to="/addCourse">Enroll in a class</Link>&nbsp;|&nbsp;
-        <Link id="viewAssignmentsLink" to="/studentAssignments">View Assignments</Link>&nbsp;|&nbsp;
-        <Link id="transcriptLink" to="/transcript">View Transcript</Link>&nbsp;|&nbsp;
-        <Link id="logoutLink" to="/logout">Logout</Link>
+      <nav className="fixed top-0 left-0 w-full bg-[#152941] p-4 shadow-lg z-50">
+        <div className="container mx-auto flex justify-center items-center space-x-6">
+          <Link to="/" className="!text-white text-lg font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#8a6e19]">Home</Link>
+          <Link id="scheduleLink" to="/schedule" className="!text-white text-lg font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#8a6e19]">View Class Schedule</Link>
+          <Link id="addCourseLink" to="/addCourse" className="!text-white text-lg font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#8a6e19]">Enroll in a class</Link>
+          <Link id="viewAssignmentsLink" to="/studentAssignments" className="!text-white text-lg font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#8a6e19]">View Assignments</Link>
+          <Link id="transcriptLink" to="/transcript" className="!text-white text-lg font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#8a6e19]">View Transcript</Link>
+          <Link id="logoutLink" to="/logout" className="!text-white text-lg font-medium transition duration-300 ease-in-out px-4 py-2 rounded-md hover:bg-[#8a6e19]">Logout</Link>
+        </div>
       </nav>
       <Outlet />
     </>

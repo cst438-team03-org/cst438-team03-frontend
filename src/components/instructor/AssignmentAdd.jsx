@@ -44,7 +44,7 @@ const AssignmentAdd = ({ onClose, secNo }) => {
 
   return (
     <>
-      <button id="addAssignmentButton" onClick={editOpen}>Add Assignment</button>
+      <button id="addAssignmentButton" class="!bg-[#8aa35d]" onClick={editOpen}>Add Assignment</button>
       <dialog ref={dialogRef} >
         <h2>Add Assignment</h2>
         <Messages response={message} />

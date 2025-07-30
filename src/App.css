@@ -1,9 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Quicksand:wght@300..700&display=swap");
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -49,4 +56,44 @@
   margin-top: 0;
   text-align: left;
   border-spacing: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Alata', sans-serif;
+  padding: 10px;
+}
+
+Link, p, span, input, button{
+  font-family: 'Quicksand', sans-serif;
+  padding: 5px;
+}
+
+div{
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* Define the keyframes for the color cycling animation */
+@keyframes color-cycle {
+  0% { background-color: #FF989C; }
+  12.5% { background-color: #FFD87E; }
+  25% { background-color: #FBF78B; }
+  37.5% { background-color: #A0F7B3; }
+  50% { background-color: #BFECFB; }
+  62.5% { background-color: #C2C8E2; }
+  75% { background-color: #C9B6D0; }
+  87.5% { background-color: #DD98FF; }
+  100% { background-color: #FF989C; }
+}
+
+.rainbow-button {
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+  animation: color-cycle 8s infinite linear; /* Applies the color cycling animation */
+  color: #000; /* Ensures text remains readable */
+  border: none;
+}
+
+.rainbow-button:hover {
+  transform: scale(1.05);
+  border: none;
 }

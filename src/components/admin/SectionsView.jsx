@@ -91,67 +91,97 @@ function SectionsView() {
   const headers = ["SecNo", "CourseId", "SecId", "Year", "Semester", "Building", "Room", "Times", "", "",];
 
   return (
-    <div>
-      <h3>Sections</h3>
-      <Messages response={message} />
-      <h4>Enter course prefix, year, semester. Example cst 2024 Spring</h4>
-      <table className="Center">
-        <tbody>
-          <tr>
-            <td>Course Prefix:</td>
-            <td>
-              <input type="text" name="courseId" placeholder="course id" value={search.courseId} onChange={editChange} />
-            </td>
-          </tr>
-          <tr>
-            <td>Year:</td>
-            <td>
-              <input type="text" name="year" placeholder="year" value={search.year} onChange={editChange} />
-            </td>
-          </tr>
-          <tr>
-            <td>Semester:</td>
-            <td>
-              <input type="text" name="semester" placeholder="semester" value={search.semester} onChange={editChange} />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <button type="submit" onClick={fetchSections}>
-        Search for Sections
-      </button>
-      <br />
-      <br />
-      <table className="Center">
-        <thead>
-          <tr>
-            {headers.map((s, idx) => (
-              <th key={idx}>{s}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sections.map((s) => (
-            <tr key={s.secNo}>
-              <td>{s.secNo}</td>
-              <td>{s.courseId}</td>
-              <td>{s.secId}</td>
-              <td>{s.year}</td>
-              <td>{s.semester}</td>
-              <td>{s.building}</td>
-              <td>{s.room}</td>
-              <td>{s.times}</td>
-              <td>
-                <SectionUpdate editSection={s} onClose={fetchSections} />
-              </td>
-              <td>
-                <button onClick={onDelete}>Delete</button>
+    <div class="bg-[linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(https://wallpapers.com/images/hd/anime-school-background-dh3ommnxthw4nln7.jpg)] bg-cover bg-center h-screen items-center flex flex-col justify-center text-white">
+      <h1 className="text-4xl font-bold mb-6">Sections</h1>
+      <h3 class="text-2xl text-[#FCBCB8]"><Messages response={message} /></h3>
+
+      {/* Search Form */}
+      <div className="w-full max-w-xl bg-gray-800/75 rounded-lg shadow-xl p-6 mb-6">
+        <h4 className="text-2xl font-semibold mb-4 text-center">Enter course prefix, year, semester.<br></br>Example: cst 2024 Spring</h4>
+        <table className="w-full mb-4">
+          <tbody>
+            <tr className="border-b border-gray-700 last:border-b-0">
+              <td className="py-2 pr-4 text-right text-gray-200">Course Prefix:</td>
+              <td className="py-2">
+                <input
+                  type="text"
+                  name="courseId"
+                  placeholder="course id"
+                  value={search.courseId}
+                  onChange={editChange}
+                  className="w-full p-2 rounded-md bg-gray-700 bg-opacity-90 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
+                />
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+            <tr className="border-b border-gray-700 last:border-b-0">
+              <td className="py-2 pr-4 text-right text-gray-200">Year:</td>
+              <td className="py-2">
+                <input
+                  type="text"
+                  name="year"
+                  placeholder="year"
+                  value={search.year}
+                  onChange={editChange}
+                  className="w-full p-2 rounded-md bg-gray-700 bg-opacity-90 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
+                />
+              </td>
+            </tr>
+            <tr className="last:border-b-0">
+              <td className="py-2 pr-4 text-right text-gray-200">Semester:</td>
+              <td className="py-2">
+                <input
+                  type="text"
+                  name="semester"
+                  placeholder="semester"
+                  value={search.semester}
+                  onChange={editChange}
+                  className="w-full p-2 rounded-md bg-gray-700 bg-opacity-90 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="submit" onClick={fetchSections} className="rainbow-button w-full font-bold py-2.5 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+          Search for Sections
+        </button>
+      </div>
+
+      {/* Sections Table */}
+      <div className="w-full max-w-5xl bg-gray-800/75 rounded-lg shadow-xl overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-700">
+          <thead className="bg-gray-700">
+            <tr>
+              {headers.map((s, idx) => (
+                <th key={idx} className="px-6 py-3 text-left text-xs font-semibold text-gray-200 uppercase tracking-wider">
+                  {s}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-700">
+            {sections.map((s) => (
+              <tr key={s.secNo} className="even:bg-gray-700 odd:bg-gray-800">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.secNo}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.courseId}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.secId}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.year}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.semester}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.building}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.room}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">{s.times}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">
+                  <SectionUpdate editSection={s} onClose={fetchSections} />
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">
+                  <button onClick={onDelete} className="!bg-red-800 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out text-sm">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <SectionAdd onClose={fetchSections} />
     </div>
   );

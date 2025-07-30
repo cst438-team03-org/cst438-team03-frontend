@@ -56,7 +56,7 @@ const AssignmentUpdate = ({ editAssignment, onClose }) => {
 
   return (
     <>
-      <button onClick={editOpen}>Edit</button>
+      <button class="!bg-indigo-800" onClick={editOpen}>Edit</button>
       <dialog ref={dialogRef} >
         <h2>{`Editing Assignment ID: ${editAssignment.id}`}</h2>
         <Messages response={message} />

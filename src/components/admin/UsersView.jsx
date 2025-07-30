@@ -84,31 +84,42 @@ function UsersView() {
 
   return (
     <>
-      <h3>Users</h3>
-      <Messages response={message} />
-      <table className="Center">
-        <thead>
-          <tr>
-            {headers.map((s, idx) => (
-              <th key={idx}>{s}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.type}</td>
-              <td><UserUpdate editUser={user} onClose={fetchUsers} /></td>
-              <td><button onClick={() => onDelete(user.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <UserAdd onClose={fetchUsers} />
+      <div class="bg-[linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(https://wallpapers.com/images/hd/anime-school-background-dh3ommnxthw4nln7.jpg)] bg-cover bg-center h-screen items-center flex flex-col justify-center text-white">
+        <h1 className="text-4xl font-bold mb-6">Users</h1>
+        <Messages response={message}/>
+        <div className="w-full max-w-4xl bg-gray-800 bg-opacity-75 rounded-lg shadow-xl overflow-hidden mb-6">
+          <table className="min-w-full divide-y divide-gray-700">
+            <thead className="bg-gray-700">
+              <tr>
+                {headers.map((s, idx) => (
+                  <th key={idx} className="px-6 py-3 text-center font-semibold text-gray-200 uppercase tracking-wider">
+                    {s}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-700">
+              {users.map((user) => (
+                <tr key={user.id} className="even:bg-gray-700 odd:bg-gray-800">
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-100">{user.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-100">{user.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-100">{user.email}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-100">{user.type}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-100">
+                    <UserUpdate editUser={user} onClose={fetchUsers} />
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-100">
+                    <button onClick={() => onDelete(user.id)} className="!bg-red-800 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <UserAdd onClose={fetchUsers} />
+      </div>
     </>
   );
 }

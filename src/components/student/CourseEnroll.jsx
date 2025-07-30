@@ -89,37 +89,50 @@ const CourseEnroll = (props) => {
   return (
     <div>
       <Messages response={message} />
-      <h3>Open Sections Available for Enrollment</h3>
-      <table>
-        <thead>
-          <tr>
-            {headers.map((column, idx) => (<th key={idx}>{column}</th>))}
-          </tr>
-        </thead>
-        <tbody>
-        {sections.map((sectionHeader, index) => (
-            <tr key={index}>
-              <td>{sectionHeader.secNo}</td>
-              <td>{sectionHeader.year}</td>
-              <td>{sectionHeader.semester}</td>
-              <td>{sectionHeader.courseId}</td>
-              <td>{sectionHeader.secId}</td>
-              <td>{sectionHeader.title}</td>
-              <td>{sectionHeader.building}</td>
-              <td>{sectionHeader.room}</td>
-              <td>{sectionHeader.times}</td>
-              <td>{sectionHeader.instructorName}</td>
-              <td>
-                <button onClick={() => handleAddClick(
-                    sectionHeader.courseId, sectionHeader.secNo)}>
-                  Add</button>
-              </td>
-            </tr>
-            ))
-        }
-        </tbody>
-      </table>
+        <div class="px-4 py-8">
+          <div class="max-w-full mx-auto">
+            <h3 class="text-3xl font-semibold mb-6 text-white text-center">Open Sections Available for Enrollment</h3>
 
+            <div class="bg-gray-800/75 shadow-md rounded-lg mb-6">
+              <table class="w-full table-auto divide-y divide-gray-700">
+                <thead class="bg-gray-700">
+                  <tr>
+                    {headers.map((column, idx) => (
+                      <th
+                        key={idx}
+                        scope="col"
+                        class="px-6 py-3 text-center text-base font-medium text-gray-200 uppercase tracking-wider"
+                      >
+                        {column}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                  {sections.map((sectionHeader, index) => (
+                    <tr key={index} class="even:bg-gray-700 odd:bg-gray-800 hover:bg-gray-600 transition-colors duration-200">
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.secNo}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.year}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.semester}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.courseId}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.secId}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.title}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.building}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.room}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.times}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{sectionHeader.instructorName}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">
+                        <button onClick={() => handleAddClick(sectionHeader.courseId, sectionHeader.secNo)} class="!bg-green-700 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out text-base shadow-md">
+                          Add
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
     </div>
   );
 }

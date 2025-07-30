@@ -91,37 +91,48 @@ const AssignmentsView = () => {
   return (
     <div>
       <Messages response={message} />
+      <div class="px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="overflow-x-auto bg-gray-800/75 shadow-md rounded-lg mb-6">
+            <table class="min-w-full divide-y divide-gray-700">
+              <thead class="bg-gray-700">
+                <tr>
+                  {headers.map((header, index) => (
+                    <th
+                      key={index}
+                      scope="col"
+                      class="px-6 py-3 text-center text-base font-medium text-gray-200 uppercase tracking-wider"
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-700">
+                {assignments.map((assignment, index) => (
+                  <tr key={index} class="even:bg-gray-700 odd:bg-gray-800 hover:bg-gray-600 transition-colors duration-200">
+                    <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{assignment.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{assignment.title}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">{assignment.dueDate}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">
+                      <AssignmentGrade assignment={assignment} onClose={fetchAssignments} />
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">
+                      <AssignmentUpdate editAssignment={assignment} onClose={fetchAssignments} />
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-base text-gray-100">
+                      <button onClick={() => handleDelete(assignment.id, assignment.title)} class="!bg-red-800 hover:bg-red-600 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out text-base shadow-md"> Delete </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            {headers.map((header, index) => (
-              <th key={index} style={{ paddingRight: '20px' }}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {assignments.map((assignment, index) => (
-            <tr key={index}>
-              <td style={{ paddingRight: '20px' }}>{assignment.id}</td>
-              <td style={{ paddingRight: '20px' }}>{assignment.title}</td>
-              <td style={{ paddingRight: '20px' }}>{assignment.dueDate}</td>
-              <td style={{ paddingRight: '20px' }}>
-                <AssignmentGrade assignment={assignment} onClose={fetchAssignments} />
-              </td>
-              <td style={{ paddingRight: '20px' }}>
-                <AssignmentUpdate editAssignment={assignment} onClose={fetchAssignments} />
-              </td>
-              <td>
-                <button onClick={() => handleDelete(assignment.id, assignment.title)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div style={{ margin: '20px' }}>
-        <AssignmentAdd secNo={secNo} onClose={fetchAssignments} />
+          <div class="mt-6 mb-8">
+            <AssignmentAdd secNo={secNo} onClose={fetchAssignments} />
+          </div>
+        </div>
       </div>
     </div>
   );

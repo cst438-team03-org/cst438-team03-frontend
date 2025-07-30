@@ -50,7 +50,7 @@ const UserAdd = ({ onClose }) => {
 
     return (
         <>
-            <button onClick={dialogOpen}>Add User</button>
+            <button onClick={dialogOpen} className="!bg-green-600 text-white font-bold py-1.5 px-3 rounded-md transition duration-300 ease-in-out">Add User</button>
             <dialog ref={dialogRef} >
                 <h2>Add User</h2>
                 <Messages response={message} />
