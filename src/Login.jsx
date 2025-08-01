@@ -40,7 +40,7 @@ const Login = ({ login }) => {
           className="w-full p-3 rounded-md bg-[#29202B]/90 focus:outline-none focus:ring-2 focus:ring-[#B48389] text-white placeholder-[#B48389]"/>
         <input id="password" type="password" name="password" placeholder="password" value={user.password} onChange={onChange}
           className="w-full p-3 rounded-md bg-[#29202B]/90 focus:outline-none focus:ring-2 focus:ring-[#B48389] text-white placeholder-[#B48389]"/>
-        <button id="loginButton" onClick={click} className="w-full bg-[#CCA01D] hover:bg-[#CCA01D] text-white font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-md"> Login </button>
+        <button id="loginButton" onClick={click} className="w-full !bg-[#CCA01D] hover:!bg-[#CCA01D] text-white font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-md"> Login </button>
       </div>
     </div>
   );
