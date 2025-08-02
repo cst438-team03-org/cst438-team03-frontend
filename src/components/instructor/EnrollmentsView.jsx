@@ -104,6 +104,7 @@ const EnrollmentsView = () => {
                   type="text"
                   onChange={(e) => handleGradeChange(index, e.target.value)}
                   placeholder="Enter grade"
+                  value={enrollment.grade}
                   class="p-2 w-32 bg-gray-900 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                 />
               </td>
