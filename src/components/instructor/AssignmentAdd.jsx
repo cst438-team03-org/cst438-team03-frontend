@@ -49,16 +49,18 @@ const AssignmentAdd = ({ onClose, secNo }) => {
         <h2>Add Assignment</h2>
         <Messages response={message} />
         <input 
+          id="title"
           type="text" 
           placeholder="Assignment title" 
           onChange={(e) => setAssignment({...assignment, title: e.target.value})}
         />
         <input 
+        id="dueDate"
           type="date" 
           onChange={(e) => setAssignment({...assignment, dueDate: e.target.value})}
         />
-        <button onClick={() => dialogRef.current.close()}>Close</button>
-        <button onClick={saveAssignment}>Save</button>
+        <button id="close" onClick={() => dialogRef.current.close()}>Close</button>
+        <button id="save" onClick={saveAssignment}>Save</button>
       </dialog>
     </>
   )
