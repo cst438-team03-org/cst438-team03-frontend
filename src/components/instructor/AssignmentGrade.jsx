@@ -109,11 +109,11 @@ const AssignmentGrade = ({ assignment }) => {
   return (
     <>
       <button id="gradeButton" class="!bg-purple-800" onClick={editOpen}>Grade</button>
-      <dialog ref={dialogRef}>
+      <dialog id="gradeDialog" ref={dialogRef}>
         <h2>Grade Assignment: {assignment.title}</h2>
         <Messages response={message} />
         
-        <table className="table table-striped">
+        <table id="gradeTable" className="table table-striped">
           <thead>
             <tr>
               {headers.map((header, index) => (
@@ -129,6 +129,7 @@ const AssignmentGrade = ({ assignment }) => {
                 <td style={{ padding: '10px 15px' }}>{grade.studentEmail}</td>
                 <td style={{ padding: '10px 15px' }}>
                   <input
+                    id = "gradeInput"
                     type="number"
                     value={grade.score || ''}
                     onChange={(e) => handleScoreChange(grade.gradeId, e.target.value)}
@@ -143,10 +144,13 @@ const AssignmentGrade = ({ assignment }) => {
         </table>
         
         <div style={{ marginTop: '20px' }}>
-          <button onClick={handleSave} style={{ marginRight: '10px' }}>Save</button>
-          <button onClick={editClose}>Close</button>
+          <button id ="saveButton" onClick={handleSave} style={{ marginRight: '10px' }}>Save</button>
+          <button id ="closeButton" onClick={editClose}>Close</button>
         </div>
-      </dialog>
+      <script>
+        document.getElementById('saveButton').disabled = false;
+      </script>
+    </dialog>
     </>
   );
 }
